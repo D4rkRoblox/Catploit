@@ -1,184 +1,1459 @@
-<!-- =========================
-     DOCUMENTATION
-     ========================= -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<section id="documentation" class="documentation">
+    <title>Catploit</title>
 
-    <div class="docs-container">
+    <style>
 
-        <h2>Documentation</h2>
+        /* ========================================
+           GRUNDLAGEN
+           ======================================== */
 
-        <p class="docs-subtitle">
-            Everything you need to know about Catploit.
-        </p>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        html {
+            scroll-behavior: smooth;
+        }
 
-        <!-- ABSCHNITT 1 -->
-
-        <div class="docs-header">
-            <h3>Getting Started</h3>
-
-            <p>
-                <!-- DEIN TEXT -->
-                Get started with Catploit and learn the basics.
-            </p>
-        </div>
-
-
-        <div class="doc-item">
-
-            <div class="doc-number">
-                01
-            </div>
-
-            <div class="doc-content">
-
-                <h4>
-                    <!-- DEIN TITEL -->
-                    Installation
-                </h4>
-
-                <p>
-                    <!-- DEIN TEXT -->
-                    Download the latest version of Catploit External from the Download Bottun.
-                    Save it to a location you can easily access.
-                </p>
-
-            </div>
-
-        </div>
+        body {
+            background: #050505;
+            color: #fff;
+            font-family: "Trebuchet MS", Arial, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
 
-        <div class="doc-item">
+        /* ========================================
+           ANIMIERTES KACHEL-GRID
+           ======================================== */
 
-            <div class="doc-number">
-                02
-            </div>
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
 
-            <div class="doc-content">
+            z-index: -3;
 
-                <h4>
-                    <!-- DEIN TITEL -->
-                    Disable Antivirus
-                </h4>
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                );
 
-                <p>
-                    <!-- DEIN TEXT -->
-                    Temporarily disable your antivirus software. This is required because the External interacts with Roblox's
-                    process memory, which may trigger false positives.
-                </p>
+            background-size: 45px 45px;
 
-            </div>
+            animation: gridMove 18s linear infinite;
 
-        </div>
+            mask-image: radial-gradient(
+                ellipse at center,
+                black 20%,
+                transparent 85%
+            );
+        }
 
+        @keyframes gridMove {
 
-        <div class="doc-item">
+            from {
+                background-position: 0 0, 0 0;
+            }
 
-            <div class="doc-number">
-                03
-            </div>
+            to {
+                background-position: 45px 45px, 45px 45px;
+            }
 
-            <div class="doc-content">
-
-                <h4>
-                    <!-- DEIN TITEL -->
-                    Open Roblox
-                </h4>
-
-                <p>
-                    <!-- DEIN TEXT -->
-                    Launch Roblox and join any experience. Make sure Roblox is fully loaded before proceeding.
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="doc-item">
-
-            <div class="doc-number">
-                04
-            </div>
-
-            <div class="doc-content">
-
-                <h4>
-                    <!-- DEIN TITEL -->
-                    Run the External
-                </h4>
-
-                <p>
-                    <!-- DEIN TEXT -->
-                    With Roblox open and running, launch the Aetrx External. The interface will appear and you can begin 
-                    cheating.
-                </p>
-
-            </div>
-
-        </div>
+        }
 
 
-        <!-- WEITERER ABSCHNITT -->
+        /* ========================================
+           MAUS-GLOW
+           ======================================== */
 
-        <div class="docs-header second-header">
+        .mouse-glow {
+            position: fixed;
 
-            <h3>Information</h3>
+            width: 500px;
+            height: 500px;
 
-            <p>
-                <!-- DEIN TEXT -->
-                Additional information about Catploit.
-            </p>
+            left: 50%;
+            top: 50%;
 
-        </div>
+            transform: translate(-50%, -50%);
 
+            pointer-events: none;
 
-        <div class="doc-item">
+            z-index: -2;
 
-            <div class="doc-number">
-                05
-            </div>
+            background: radial-gradient(
+                circle,
+                rgba(255,255,255,0.09) 0%,
+                rgba(255,255,255,0.035) 25%,
+                transparent 70%
+            );
 
-            <div class="doc-content">
+            filter: blur(15px);
 
-                <h4>
-                    <!-- DEIN TITEL -->
-                    Updates
-                </h4>
-
-                <p>
-                    <!-- DEIN TEXT -->
-                    Write information about future updates here.
-                </p>
-
-            </div>
-
-        </div>
+            transition:
+                left 0.12s ease-out,
+                top 0.12s ease-out;
+        }
 
 
-        <div class="doc-item">
+        /* ========================================
+           ZENTRALER GLOW
+           ======================================== */
 
-            <div class="doc-number">
-                06
-            </div>
+        body::after {
+            content: "";
 
-            <div class="doc-content">
+            position: fixed;
 
-                <h4>
-                    <!-- DEIN TITEL -->
-                    Support
-                </h4>
+            width: 650px;
+            height: 650px;
 
-                <p>
-                    <!-- DEIN TEXT -->
-                    Tell users where they can get support.
-                </p>
+            left: 50%;
+            top: 50%;
 
-            </div>
+            transform: translate(-50%, -50%);
 
-        </div>
+            background: radial-gradient(
+                circle,
+                rgba(255,255,255,0.025),
+                transparent 70%
+            );
+
+            pointer-events: none;
+
+            z-index: -2;
+
+            animation: glowPulse 5s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+
+            0%, 100% {
+                opacity: 0.5;
+                transform:
+                    translate(-50%, -50%)
+                    scale(0.95);
+            }
+
+            50% {
+                opacity: 1;
+                transform:
+                    translate(-50%, -50%)
+                    scale(1.08);
+            }
+
+        }
+
+
+        /* ========================================
+           NAVIGATION
+           ======================================== */
+
+        nav {
+            height: 58px;
+
+            border-bottom: 1px solid #1c1c1c;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 8%;
+
+            background: rgba(5,5,5,0.72);
+
+            backdrop-filter: blur(12px);
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 20;
+
+            animation:
+                navAppear 0.8s ease forwards;
+        }
+
+        @keyframes navAppear {
+
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* Logo */
+
+        .logo {
+            font-size: 20px;
+
+            font-weight: 800;
+
+            letter-spacing: 5px;
+
+            animation:
+                logoGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes logoGlow {
+
+            0%, 100% {
+                text-shadow:
+                    0 0 0 rgba(255,255,255,0);
+            }
+
+            50% {
+                text-shadow:
+                    0 0 18px rgba(255,255,255,0.25);
+            }
+
+        }
+
+
+        /* Navigation Links */
+
+        .nav-links {
+            display: flex;
+
+            gap: 34px;
+        }
+
+        .nav-links a {
+            color: #888;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            transition:
+                color 0.25s ease,
+                transform 0.25s ease;
+
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: "";
+
+            position: absolute;
+
+            left: 50%;
+
+            bottom: -7px;
+
+            width: 0;
+
+            height: 1px;
+
+            background: white;
+
+            transform: translateX(-50%);
+
+            transition:
+                width 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: white;
+
+            transform:
+                translateY(-1px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: white;
+        }
+
+
+        /* ========================================
+           HOME
+           ======================================== */
+
+        main {
+            min-height:
+                calc(100vh - 58px);
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            text-align: center;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        main::before {
+            content: "";
+
+            position: absolute;
+
+            width: 700px;
+
+            height: 500px;
+
+            background: radial-gradient(
+                circle,
+                rgba(255,255,255,0.045),
+                transparent 65%
+            );
+
+            top: 10%;
+
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            pointer-events: none;
+
+            animation:
+                heroGlow 6s ease-in-out infinite;
+        }
+
+        @keyframes heroGlow {
+
+            0%, 100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+        }
+
+
+        /* Hero */
+
+        .hero {
+            position: relative;
+
+            z-index: 1;
+
+            margin-top: -50px;
+
+            animation:
+                heroAppear
+                1s
+                cubic-bezier(.2,.8,.2,1)
+                forwards;
+        }
+
+        @keyframes heroAppear {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(35px)
+                    scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+
+        }
+
+
+        /* Titel */
+
+        h1 {
+            font-size:
+                clamp(60px, 9vw, 110px);
+
+            font-weight: 800;
+
+            letter-spacing: -5px;
+
+            margin-bottom: 12px;
+
+            animation:
+                titleFloat
+                5s
+                ease-in-out
+                infinite;
+        }
+
+        @keyframes titleFloat {
+
+            0%, 100% {
+                transform:
+                    translateY(0);
+            }
+
+            50% {
+                transform:
+                    translateY(-6px);
+            }
+
+        }
+
+
+        /* Untertitel */
+
+        .subtitle {
+            color: #999;
+
+            font-size: 25px;
+
+            margin-bottom: 25px;
+
+            animation:
+                fadeUp
+                1.2s
+                ease
+                forwards;
+        }
+
+
+        /* Beschreibung */
+
+        .description {
+            color: #666;
+
+            font-size: 16px;
+
+            margin-bottom: 42px;
+
+            animation:
+                fadeUp
+                1.4s
+                ease
+                forwards;
+        }
+
+        @keyframes fadeUp {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        /* ========================================
+           BUTTONS
+           ======================================== */
+
+        .buttons {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 14px;
+
+            flex-wrap: wrap;
+
+            animation:
+                fadeUp
+                1.6s
+                ease
+                forwards;
+        }
+
+        .button {
+            text-decoration: none;
+
+            color: white;
+
+            border: 1px solid #242424;
+
+            border-radius: 30px;
+
+            padding: 15px 32px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease,
+                background 0.25s ease,
+                box-shadow 0.25s ease;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        /* Button Licht */
+
+        .button::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+
+            left: -120%;
+
+            width: 80%;
+
+            height: 100%;
+
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,255,255,0.12),
+                transparent
+            );
+
+            transform:
+                skewX(-20deg);
+
+            transition:
+                left 0.6s ease;
+        }
+
+        .button:hover::before {
+            left: 140%;
+        }
+
+        .button:hover {
+            border-color: #555;
+
+            background: #111;
+
+            transform:
+                translateY(-4px)
+                scale(1.02);
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.35),
+                0 0 20px rgba(255,255,255,0.03);
+        }
+
+        .button:active {
+            transform:
+                translateY(-1px)
+                scale(0.98);
+        }
+
+
+        /* Download Button */
+
+        .button.primary {
+            background: white;
+
+            color: #080808;
+
+            border-color: white;
+
+            box-shadow:
+                0 0 25px
+                rgba(255,255,255,0.08);
+        }
+
+        .button.primary:hover {
+            background: #ddd;
+
+            border-color: #ddd;
+
+            box-shadow:
+                0 0 35px
+                rgba(255,255,255,0.15);
+        }
+
+
+        /* ========================================
+           DOCUMENTATION
+           ======================================== */
+
+        .documentation {
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            padding:
+                110px 25px 120px;
+
+            border-top: 1px solid #111;
+
+            position: relative;
+        }
+
+        .docs-container {
+            width: 100%;
+
+            max-width: 800px;
+
+            position: relative;
+
+            z-index: 1;
+        }
+
+
+        /* Documentation Titel */
+
+        .docs-container h2 {
+            text-align: center;
+
+            font-size:
+                clamp(55px, 8vw, 85px);
+
+            font-weight: 800;
+
+            letter-spacing: -4px;
+
+            margin-bottom: 20px;
+
+            animation:
+                docsTitle
+                1s
+                ease
+                forwards;
+        }
+
+        @keyframes docsTitle {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        .docs-subtitle {
+            text-align: center;
+
+            color: #888;
+
+            font-size: 17px;
+
+            margin-bottom: 75px;
+        }
+
+
+        /* Documentation Kategorie */
+
+        .docs-header {
+            margin-bottom: 25px;
+        }
+
+        .docs-header h3 {
+            font-size: 32px;
+
+            margin-bottom: 12px;
+
+            letter-spacing: -1px;
+        }
+
+        .docs-header p {
+            color: #777;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+        }
+
+
+        /* Zweite Kategorie */
+
+        .second-header {
+            margin-top: 90px;
+        }
+
+
+        /* ========================================
+           DOCUMENTATION ITEMS
+           ======================================== */
+
+        .doc-item {
+            display: grid;
+
+            grid-template-columns:
+                75px 1fr;
+
+            gap: 0;
+
+            padding: 30px 0;
+
+            border-bottom:
+                1px solid #1c1c1c;
+
+            transition:
+                transform 0.3s ease,
+                border-color 0.3s ease;
+        }
+
+        .doc-item:hover {
+            transform:
+                translateX(8px);
+
+            border-color:
+                #333;
+        }
+
+
+        /* Nummer */
+
+        .doc-number {
+            font-size: 38px;
+
+            font-weight: 800;
+
+            color: #242424;
+
+            letter-spacing: -2px;
+
+            transition:
+                color 0.3s ease,
+                text-shadow 0.3s ease;
+        }
+
+        .doc-item:hover .doc-number {
+            color: #444;
+
+            text-shadow:
+                0 0 20px
+                rgba(255,255,255,0.08);
+        }
+
+
+        /* Dokumentations-Text */
+
+        .doc-content h4 {
+            font-size: 18px;
+
+            margin-bottom: 10px;
+        }
+
+        .doc-content p {
+            color: #777;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+
+            max-width: 680px;
+        }
+
+
+        /* ========================================
+           PARTIKEL
+           ======================================== */
+
+        .particles {
+            position: fixed;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            z-index: -1;
+
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+
+            width: 2px;
+
+            height: 2px;
+
+            background:
+                rgba(255,255,255,0.35);
+
+            border-radius: 50%;
+
+            animation:
+                particleFloat
+                linear
+                infinite,
+
+                particleGlow
+                3s
+                ease-in-out
+                infinite;
+        }
+
+        .particle:nth-child(1) {
+            left: 10%;
+
+            animation-duration: 14s;
+
+            animation-delay: -3s;
+        }
+
+        .particle:nth-child(2) {
+            left: 22%;
+
+            animation-duration: 18s;
+
+            animation-delay: -9s;
+        }
+
+        .particle:nth-child(3) {
+            left: 35%;
+
+            animation-duration: 12s;
+
+            animation-delay: -5s;
+        }
+
+        .particle:nth-child(4) {
+            left: 48%;
+
+            animation-duration: 20s;
+
+            animation-delay: -12s;
+        }
+
+        .particle:nth-child(5) {
+            left: 61%;
+
+            animation-duration: 15s;
+
+            animation-delay: -7s;
+        }
+
+        .particle:nth-child(6) {
+            left: 74%;
+
+            animation-duration: 17s;
+
+            animation-delay: -11s;
+        }
+
+        .particle:nth-child(7) {
+            left: 86%;
+
+            animation-duration: 13s;
+
+            animation-delay: -4s;
+        }
+
+        .particle:nth-child(8) {
+            left: 93%;
+
+            animation-duration: 19s;
+
+            animation-delay: -14s;
+        }
+
+        @keyframes particleFloat {
+
+            from {
+                top: 110%;
+
+                transform:
+                    translateX(0);
+            }
+
+            to {
+                top: -10%;
+
+                transform:
+                    translateX(80px);
+            }
+
+        }
+
+        @keyframes particleGlow {
+
+            0%, 100% {
+                opacity: 0.2;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+
+        }
+
+
+        /* ========================================
+           MOBILE
+           ======================================== */
+
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 0 25px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            h1 {
+                font-size: 65px;
+            }
+
+            .subtitle {
+                font-size: 20px;
+            }
+
+            .description {
+                padding: 0 25px;
+            }
+
+            .button {
+                padding:
+                    14px 27px;
+            }
+
+            body::before {
+                background-size:
+                    35px 35px;
+            }
+
+            .mouse-glow {
+                display: none;
+            }
+
+            .documentation {
+                padding:
+                    80px 25px;
+            }
+
+            .docs-container h2 {
+                font-size: 55px;
+            }
+
+            .docs-subtitle {
+                margin-bottom: 55px;
+            }
+
+            .doc-item {
+                grid-template-columns:
+                    55px 1fr;
+            }
+
+            .doc-number {
+                font-size: 30px;
+            }
+
+            .doc-content h4 {
+                font-size: 16px;
+            }
+
+            .doc-content p {
+                font-size: 13px;
+            }
+
+        }
+
+
+        /* ========================================
+           REDUCED MOTION
+           ======================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration:
+                    0.01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                scroll-behavior:
+                    auto !important;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- ========================================
+         MAUS-GLOW
+         ======================================== -->
+
+    <div class="mouse-glow"></div>
+
+
+    <!-- ========================================
+         PARTIKEL
+         ======================================== -->
+
+    <div class="particles">
+
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
+        <span class="particle"></span>
 
     </div>
 
-</section>
+
+    <!-- ========================================
+         NAVIGATION
+         ======================================== -->
+
+    <nav>
+
+        <div class="logo">
+            CATPLOIT
+        </div>
+
+        <div class="nav-links">
+
+            <a
+                href="#"
+                class="active"
+            >
+                Home
+            </a>
+
+
+            <!-- Roblox -->
+
+            <a
+                href="https://www.roblox.com/de/users/11262324818/profile"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Roblox
+            </a>
+
+
+            <!-- Documentation -->
+
+            <a href="#documentation">
+                Documentation
+            </a>
+
+
+            <!-- Discord -->
+
+            <a
+                href="https://discord.gg/3wepXYz4c"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Discord
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ========================================
+         HOME
+         ======================================== -->
+
+    <main id="home">
+
+        <section class="hero">
+
+            <h1>
+                Catploit
+            </h1>
+
+
+            <div class="subtitle">
+                Making Exploits work.
+            </div>
+
+
+            <div class="description">
+                The best Free External on Roblox.
+            </div>
+
+
+            <div class="buttons">
+
+
+                <!-- DOWNLOAD -->
+
+                <a
+                    class="button primary"
+                    href="Catploit.exe"
+                    download="Catploit.exe"
+                >
+                    Download
+                </a>
+
+
+                <!-- DOCUMENTATION -->
+
+                <a
+                    class="button"
+                    href="#documentation"
+                >
+                    Documentation
+                </a>
+
+
+                <!-- DISCORD -->
+
+                <a
+                    class="button"
+                    href="https://discord.gg/3wepXYz4c"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Discord
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ========================================
+         DOCUMENTATION
+         ======================================== -->
+
+    <section
+        id="documentation"
+        class="documentation"
+    >
+
+        <div class="docs-container">
+
+
+            <h2>
+                Documentation
+            </h2>
+
+
+            <p class="docs-subtitle">
+                Everything you need to know about Catploit.
+            </p>
+
+
+            <!-- ==================================
+                 KATEGORIE 1
+                 HIER KANNST DU TEXT ÄNDERN
+                 ================================== -->
+
+            <div class="docs-header">
+
+                <h3>
+                    Getting Started
+                </h3>
+
+                <p>
+                    <!-- DEIN TEXT -->
+                    Get started with Catploit and learn the basics.
+                </p>
+
+            </div>
+
+
+            <!-- ==================================
+                 01
+                 ================================== -->
+
+            <div class="doc-item">
+
+                <div class="doc-number">
+                    01
+                </div>
+
+                <div class="doc-content">
+
+                    <h4>
+                        Download the External
+                    </h4>
+
+                    <p>
+                        <!-- DEIN TEXT -->
+                        Download the latest version of Aetrx External from the Downloads page. Save it to a location you can easily
+                        access.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================================
+                 02
+                 ================================== -->
+
+            <div class="doc-item">
+
+                <div class="doc-number">
+                    02
+                </div>
+
+                <div class="doc-content">
+
+                    <h4>
+                        Disable Antivirus
+                    </h4>
+
+                    <p>
+                        <!-- DEIN TEXT -->
+                        Temporarily disable your antivirus software. This is required because the External interacts with Roblox's
+                        process memory, which may trigger false positives.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================================
+                 03
+                 ================================== -->
+
+            <div class="doc-item">
+
+                <div class="doc-number">
+                    03
+                </div>
+
+                <div class="doc-content">
+
+                    <h4>
+                         Open Roblox
+                    </h4>
+
+                    <p>
+                        <!-- DEIN TEXT -->
+                        Launch Roblox and join any experience. Make sure Roblox is fully loaded before proceeding.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================================
+                 04
+                 ================================== -->
+
+            <div class="doc-item">
+
+                <div class="doc-number">
+                    04
+                </div>
+
+                <div class="doc-content">
+
+                    <h4>
+                        Run the External
+                    </h4>
+
+                    <p>
+                        <!-- DEIN TEXT -->
+                        With Roblox open and running, launch the Aetrx External. The interface will appear and you can begin 
+                        cheating.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================================
+                 KATEGORIE 2
+                 ================================== -->
+
+            <div class="docs-header second-header">
+
+                <h3>
+                    Information
+                </h3>
+
+                <p>
+                    <!-- DEIN TEXT -->
+                    Additional information about Catploit.
+                </p>
+
+            </div>
+
+
+            <!-- ==================================
+                 05
+                 ================================== -->
+
+            <div class="doc-item">
+
+                <div class="doc-number">
+                    05
+                </div>
+
+                <div class="doc-content">
+
+                    <h4>
+                        Updates
+                    </h4>
+
+                    <p>
+                        <!-- DEIN TEXT -->
+                        Better Aimbot and Fly in the Future
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================================
+                 06
+                 ================================== -->
+
+            <div class="doc-item">
+
+                <div class="doc-number">
+                    06
+                </div>
+
+                <div class="doc-content">
+
+                    <h4>
+                        Support
+                    </h4>
+
+                    <p>
+                        <!-- DEIN TEXT -->
+                        Tell users where they can get support.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================
+         MAUS-ANIMATION
+         ======================================== -->
+
+    <script>
+
+        const glow =
+            document.querySelector(".mouse-glow");
+
+        let mouseX =
+            window.innerWidth / 2;
+
+        let mouseY =
+            window.innerHeight / 2;
+
+        let currentX =
+            mouseX;
+
+        let currentY =
+            mouseY;
+
+
+        document.addEventListener(
+            "mousemove",
+            (event) => {
+
+                mouseX =
+                    event.clientX;
+
+                mouseY =
+                    event.clientY;
+
+            }
+        );
+
+
+        function animateGlow() {
+
+            currentX +=
+                (mouseX - currentX) * 0.12;
+
+            currentY +=
+                (mouseY - currentY) * 0.12;
+
+
+            glow.style.left =
+                currentX + "px";
+
+            glow.style.top =
+                currentY + "px";
+
+
+            requestAnimationFrame(
+                animateGlow
+            );
+
+        }
+
+
+        animateGlow();
+
+    </script>
+
+
+</body>
+</html>
