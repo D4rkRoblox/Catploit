@@ -20,7 +20,6 @@
             min-height: 100vh;
         }
 
-        /* Navigation */
         nav {
             height: 58px;
             border-bottom: 1px solid #1c1c1c;
@@ -56,7 +55,6 @@
             color: white;
         }
 
-        /* Hauptbereich */
         main {
             min-height: calc(100vh - 58px);
             display: flex;
@@ -67,7 +65,6 @@
             overflow: hidden;
         }
 
-        /* dezenter Hintergrund */
         main::before {
             content: "";
             position: absolute;
@@ -109,7 +106,6 @@
             margin-bottom: 42px;
         }
 
-        /* Buttons */
         .buttons {
             display: flex;
             justify-content: center;
@@ -145,7 +141,6 @@
             border-color: #ddd;
         }
 
-        /* Handy */
         @media (max-width: 700px) {
             nav {
                 padding: 0 25px;
@@ -173,44 +168,91 @@
 <body>
 
     <nav>
-        <div class="logo">Catploit</div>
+
+        <div class="logo">
+            CATPLOIT
+        </div>
 
         <div class="nav-links">
-            <a href="#" class="active">Home</a>
-            <a href="#downloads">Downloads</a>
-            <a href="#documentation">Documentation</a>
-            <a href="#discord">Discord</a>
+
+            <a href="#" class="active">
+                Home
+            </a>
+
+            <!-- Roblox -->
+            <a
+                href="https://www.roblox.com/de/users/11262324818/profile"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Roblox
+            </a>
+
+            <a href="#documentation">
+                Documentation
+            </a>
+
+            <!-- Discord -->
+            <a
+                href="https://discord.gg/3wepXYz4c"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Discord
+            </a>
+
         </div>
+
     </nav>
 
+
     <main>
+
         <section class="hero">
 
-            <h1>DEINNAME</h1>
+            <h1>
+                Catploit
+            </h1>
 
             <div class="subtitle">
-                Deine moderne Download-Seite
+                Making Minecraft better
             </div>
 
             <div class="description">
-                Lade unsere Software kostenlos herunter.
+                A modern Minecraft client made for players.
             </div>
 
             <div class="buttons">
-                <a class="button primary" href="#downloads">
+
+                <!-- Direkter Download -->
+                <a
+                    class="button primary"
+                    href="Catploit.exe"
+                    download="Catploit.exe"
+                >
                     Download
                 </a>
 
-                <a class="button" href="#documentation">
+                <a
+                    class="button"
+                    href="#documentation"
+                >
                     Documentation
                 </a>
 
-                <a class="button" href="#discord">
+                <a
+                    class="button"
+                    href="https://discord.gg/3wepXYz4c"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
                     Discord
                 </a>
+
             </div>
 
         </section>
+
     </main>
 
 </body>
