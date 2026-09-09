@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Catploit</title>
 
     <style>
@@ -13,26 +12,175 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background: #050505;
             color: #fff;
             font-family: "Trebuchet MS", Arial, sans-serif;
             min-height: 100vh;
+            overflow-x: hidden;
         }
+
+        /* Kachel-Hintergrund */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -3;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 45px 45px;
+
+            animation: gridMove 18s linear infinite;
+
+            mask-image: radial-gradient(
+                ellipse at center,
+                black 20%,
+                transparent 85%
+            );
+        }
+
+        @keyframes gridMove {
+            from {
+                background-position: 0 0, 0 0;
+            }
+
+            to {
+                background-position: 45px 45px, 45px 45px;
+            }
+        }
+
+        /* Maus-Glow */
+
+        .mouse-glow {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+
+            left: 0;
+            top: 0;
+
+            pointer-events: none;
+            z-index: -2;
+
+            transform: translate(-50%, -50%);
+
+            background: radial-gradient(
+                circle,
+                rgba(255,255,255,0.09) 0%,
+                rgba(255,255,255,0.035) 25%,
+                transparent 70%
+            );
+
+            filter: blur(15px);
+
+            transition:
+                left 0.12s ease-out,
+                top 0.12s ease-out;
+        }
+
+        /* Zusätzliches mittleres Glow */
+
+        body::after {
+            content: "";
+            position: fixed;
+
+            width: 650px;
+            height: 650px;
+
+            left: 50%;
+            top: 50%;
+
+            transform: translate(-50%, -50%);
+
+            background: radial-gradient(
+                circle,
+                rgba(255,255,255,0.025),
+                transparent 70%
+            );
+
+            pointer-events: none;
+            z-index: -2;
+
+            animation: glowPulse 5s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% {
+                opacity: 0.5;
+                transform: translate(-50%, -50%) scale(0.95);
+            }
+
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.08);
+            }
+        }
+
+        /* Navigation */
 
         nav {
             height: 58px;
+
             border-bottom: 1px solid #1c1c1c;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
+
             padding: 0 8%;
+
+            background: rgba(5,5,5,0.72);
+            backdrop-filter: blur(12px);
+
+            position: relative;
+            z-index: 20;
+
+            animation: navAppear 0.8s ease forwards;
+        }
+
+        @keyframes navAppear {
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .logo {
             font-size: 20px;
             font-weight: 800;
             letter-spacing: 5px;
+
+            animation: logoGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes logoGlow {
+            0%, 100% {
+                text-shadow: 0 0 0 rgba(255,255,255,0);
+            }
+
+            50% {
+                text-shadow: 0 0 18px rgba(255,255,255,0.25);
+            }
         }
 
         .nav-links {
@@ -44,104 +192,267 @@
             color: #888;
             text-decoration: none;
             font-size: 13px;
-            transition: 0.2s;
+
+            transition: 0.25s ease;
+
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: "";
+
+            position: absolute;
+
+            left: 50%;
+            bottom: -7px;
+
+            width: 0;
+            height: 1px;
+
+            background: white;
+
+            transform: translateX(-50%);
+
+            transition: 0.25s ease;
         }
 
         .nav-links a:hover {
             color: white;
+            transform: translateY(-1px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .nav-links a.active {
             color: white;
         }
 
+        /* Hauptbereich */
+
         main {
             min-height: calc(100vh - 58px);
+
             display: flex;
             justify-content: center;
             align-items: center;
+
             text-align: center;
+
             position: relative;
             overflow: hidden;
         }
 
         main::before {
             content: "";
+
             position: absolute;
+
             width: 700px;
             height: 500px;
+
             background: radial-gradient(
                 circle,
                 rgba(255,255,255,0.045),
                 transparent 65%
             );
+
             top: 10%;
             left: 50%;
+
             transform: translateX(-50%);
+
             pointer-events: none;
         }
 
         .hero {
             position: relative;
             z-index: 1;
+
             margin-top: -50px;
+
+            animation:
+                heroAppear 1s cubic-bezier(.2,.8,.2,1) forwards;
+        }
+
+        @keyframes heroAppear {
+            from {
+                opacity: 0;
+                transform: translateY(35px) scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         h1 {
             font-size: clamp(60px, 9vw, 110px);
+
             font-weight: 800;
+
             letter-spacing: -5px;
+
             margin-bottom: 12px;
+
+            animation: titleFloat 5s ease-in-out infinite;
+        }
+
+        @keyframes titleFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
         }
 
         .subtitle {
             color: #999;
+
             font-size: 25px;
+
             margin-bottom: 25px;
+
+            animation: fadeUp 1.2s ease forwards;
         }
 
         .description {
             color: #666;
+
             font-size: 16px;
+
             margin-bottom: 42px;
+
+            animation: fadeUp 1.4s ease forwards;
         }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Buttons */
 
         .buttons {
             display: flex;
+
             justify-content: center;
+
             gap: 14px;
+
             flex-wrap: wrap;
+
+            animation: fadeUp 1.6s ease forwards;
         }
 
         .button {
             text-decoration: none;
+
             color: white;
+
             border: 1px solid #242424;
+
             border-radius: 30px;
+
             padding: 15px 32px;
+
             font-size: 14px;
+
             font-weight: 600;
-            transition: 0.25s;
+
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease,
+                background 0.25s ease,
+                box-shadow 0.25s ease;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .button::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: -120%;
+
+            width: 80%;
+            height: 100%;
+
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,255,255,0.12),
+                transparent
+            );
+
+            transform: skewX(-20deg);
+
+            transition: left 0.6s ease;
+        }
+
+        .button:hover::before {
+            left: 140%;
         }
 
         .button:hover {
             border-color: #555;
+
             background: #111;
-            transform: translateY(-2px);
+
+            transform:
+                translateY(-4px)
+                scale(1.02);
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.35),
+                0 0 20px rgba(255,255,255,0.03);
+        }
+
+        .button:active {
+            transform:
+                translateY(-1px)
+                scale(0.98);
         }
 
         .button.primary {
             background: white;
+
             color: #080808;
+
             border-color: white;
+
+            box-shadow:
+                0 0 25px rgba(255,255,255,0.08);
         }
 
         .button.primary:hover {
             background: #ddd;
+
             border-color: #ddd;
+
+            box-shadow:
+                0 0 35px rgba(255,255,255,0.15);
         }
 
+        /* Mobile */
+
         @media (max-width: 700px) {
+
             nav {
                 padding: 0 25px;
             }
@@ -161,11 +472,38 @@
             .description {
                 padding: 0 25px;
             }
+
+            .button {
+                padding: 14px 27px;
+            }
+
+            body::before {
+                background-size: 35px 35px;
+            }
+
+            .mouse-glow {
+                display: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
         }
     </style>
 </head>
 
 <body>
+
+    <!-- Maus folgt diesem Glow -->
+    <div class="mouse-glow"></div>
+
+    <!-- Navigation -->
 
     <nav>
 
@@ -179,7 +517,6 @@
                 Home
             </a>
 
-            <!-- Roblox -->
             <a
                 href="https://www.roblox.com/de/users/11262324818/profile"
                 target="_blank"
@@ -192,7 +529,6 @@
                 Documentation
             </a>
 
-            <!-- Discord -->
             <a
                 href="https://discord.gg/3wepXYz4c"
                 target="_blank"
@@ -206,6 +542,8 @@
     </nav>
 
 
+    <!-- Hauptbereich -->
+
     <main>
 
         <section class="hero">
@@ -215,16 +553,15 @@
             </h1>
 
             <div class="subtitle">
-                Making Minecraft better
+                Making Exploits Work
             </div>
 
             <div class="description">
-                A modern Minecraft client made for players.
+                The best free External
             </div>
 
             <div class="buttons">
 
-                <!-- Direkter Download -->
                 <a
                     class="button primary"
                     href="Catploit.exe"
@@ -254,6 +591,77 @@
         </section>
 
     </main>
+
+
+    <!-- Documentation -->
+
+    <section
+        id="documentation"
+        style="
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-top: 1px solid #111;
+        "
+    >
+
+        <div>
+
+            <h2 style="
+                font-size: 55px;
+                margin-bottom: 20px;
+                letter-spacing: -2px;
+            ">
+                Documentation
+            </h2>
+
+            <p style="
+                color: #666;
+                font-size: 16px;
+            ">
+                Documentation coming soon.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Maus-Bewegung -->
+
+    <script>
+
+        const glow = document.querySelector(".mouse-glow");
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+
+        let currentX = mouseX;
+        let currentY = mouseY;
+
+        document.addEventListener("mousemove", (event) => {
+
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+
+        });
+
+        function animateGlow() {
+
+            currentX += (mouseX - currentX) * 0.12;
+            currentY += (mouseY - currentY) * 0.12;
+
+            glow.style.left = currentX + "px";
+            glow.style.top = currentY + "px";
+
+            requestAnimationFrame(animateGlow);
+        }
+
+        animateGlow();
+
+    </script>
 
 </body>
 </html>
