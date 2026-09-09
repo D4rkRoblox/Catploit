@@ -3,69 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catploit - Download</title>
+
+    <title>Deine Website</title>
 
     <style>
-        body {
+        * {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #050505;
+            color: #fff;
+            font-family: "Trebuchet MS", Arial, sans-serif;
             min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            height: 58px;
+            border-bottom: 1px solid #1c1c1c;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 34px;
+        }
+
+        .nav-links a {
+            color: #888;
+            text-decoration: none;
+            font-size: 13px;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-links a.active {
+            color: white;
+        }
+
+        /* Hauptbereich */
+        main {
+            min-height: calc(100vh - 58px);
             display: flex;
             justify-content: center;
             align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .box {
-            background: white;
-            padding: 50px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-            max-width: 500px;
+        /* dezenter Hintergrund */
+        main::before {
+            content: "";
+            position: absolute;
+            width: 700px;
+            height: 500px;
+            background: radial-gradient(
+                circle,
+                rgba(255,255,255,0.045),
+                transparent 65%
+            );
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+
+        .hero {
+            position: relative;
+            z-index: 1;
+            margin-top: -50px;
         }
 
         h1 {
-            font-size: 40px;
-            margin-bottom: 10px;
+            font-size: clamp(60px, 9vw, 110px);
+            font-weight: 800;
+            letter-spacing: -5px;
+            margin-bottom: 12px;
         }
 
-        p {
+        .subtitle {
+            color: #999;
+            font-size: 25px;
+            margin-bottom: 25px;
+        }
+
+        .description {
             color: #666;
-            font-size: 18px;
-            margin-bottom: 30px;
+            font-size: 16px;
+            margin-bottom: 42px;
         }
 
-        .download {
-            display: inline-block;
-            padding: 15px 30px;
-            background: #667eea;
-            color: white;
+        /* Buttons */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .button {
             text-decoration: none;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 18px;
+            color: white;
+            border: 1px solid #242424;
+            border-radius: 30px;
+            padding: 15px 32px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.25s;
         }
 
-        .download:hover {
-            background: #5568d9;
+        .button:hover {
+            border-color: #555;
+            background: #111;
+            transform: translateY(-2px);
+        }
+
+        .button.primary {
+            background: white;
+            color: #080808;
+            border-color: white;
+        }
+
+        .button.primary:hover {
+            background: #ddd;
+            border-color: #ddd;
+        }
+
+        /* Handy */
+        @media (max-width: 700px) {
+            nav {
+                padding: 0 25px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            h1 {
+                font-size: 65px;
+            }
+
+            .subtitle {
+                font-size: 20px;
+            }
+
+            .description {
+                padding: 0 25px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="box">
-        <h1>🐱 Catploit</h1>
+    <nav>
+        <div class="logo">DEINNAME</div>
 
-        <p>
-            Lade Catploit kostenlos herunter.
-        </p>
+        <div class="nav-links">
+            <a href="#" class="active">Home</a>
+            <a href="#downloads">Downloads</a>
+            <a href="#documentation">Documentation</a>
+            <a href="#discord">Discord</a>
+        </div>
+    </nav>
 
-        <a class="download" href="Catploit.exe" download>
-            ⬇ Kostenlos herunterladen
-        </a>
-    </div>
+    <main>
+        <section class="hero">
+
+            <h1>DEINNAME</h1>
+
+            <div class="subtitle">
+                Deine moderne Download-Seite
+            </div>
+
+            <div class="description">
+                Lade unsere Software kostenlos herunter.
+            </div>
+
+            <div class="buttons">
+                <a class="button primary" href="#downloads">
+                    Download
+                </a>
+
+                <a class="button" href="#documentation">
+                    Documentation
+                </a>
+
+                <a class="button" href="#discord">
+                    Discord
+                </a>
+            </div>
+
+        </section>
+    </main>
 
 </body>
 </html>
